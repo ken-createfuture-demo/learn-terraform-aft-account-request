@@ -1,29 +1,28 @@
-module "sandbox_approval_gates_test_final" {
-source = "./modules/aft-account-request"
+module "sandbox_demo_vpc_account" {
+  source = "./modules/aft-account-request"
 
-control_tower_parameters = {
-AccountEmail              = "keneaft+accountrequest+2@gmail.com"
-AccountName               = "aft-account-request2"
-ManagedOrganizationalUnit = "Sandbox"
-SSOUserEmail              = "keneaft@gmail.com"
-SSOUserFirstName          = "Kene"
-SSOUserLastName           = "AFT"
-}
+  control_tower_parameters = {
+    AccountEmail              = "keneaft+sandbox-vpc-test@gmail.com" # Must be unique
+    AccountName               = "sandbox-vpc-demo-account"
+    ManagedOrganizationalUnit = "Sandbox"
+    SSOUserEmail              = "keneaft@gmail.com"
+    SSOUserFirstName          = "Kene"
+    SSOUserLastName           = "AFT"
+  }
 
-account_tags = {
-Environment = "Testing"
-Purpose     = "ApprovalGatesFinalValidation"
-}
+  account_tags = {
+    Environment = "Testing"
+    VPC_Demo    = "True"
+  }
 
-change_management_parameters = {
-change_requested_by = "kene.aft"
-change_reason       = "Final validation of approval gates implementation"
-}
+  change_management_parameters = {
+    change_requested_by = "kene.aft"
+    change_reason       = "Testing automatic VPC deployment via AFT customizations"
+  }
 
-custom_fields = {
-test_type  = "approval-gates-validation"
-deployment = "fresh-aft-with-correct-ssm"
-}
+  custom_fields = {
+    demo_status = "active"
+  }
 
-account_customizations_name = "sandbox"
+  account_customizations_name = "sandbox"
 }
